@@ -5,8 +5,24 @@ import Button from './Button/Button';
 function App() {
   return (
     <div className="App">
-      <Button size="Large">
-        Meghraj Deshmukg
+      <br></br>
+      <Button variant='success' size="Large" disabled={true}>
+        Success
+      </Button>
+      <br></br>
+      <br></br>
+      <Button variant='primary' size="Large">
+        Meghraj Primary
+      </Button>
+      <br></br>
+      <br></br>
+      <Button variant='error' size="Large">
+        Meghraj Error
+      </Button>
+      <br></br>
+      <br></br>
+      <Button variant='normal' size="Large">
+        Meghraj Error
       </Button>
     </div>
   );

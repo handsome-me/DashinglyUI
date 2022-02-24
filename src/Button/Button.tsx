@@ -3,7 +3,31 @@ import PropTypes from 'prop-types';
 import { css, cx,CSSStyleSheet } from '@emotion/css'
 import { JsxChild } from 'typescript';
 
+const Theme:any={
 
+    primary:{
+         normal:"#3366ff",
+        light:"#234cc7",
+        dark:"#082d9b"
+    },
+    error:{
+        normal:"#D14343",
+        light:"#bd3a3a",
+        dark:"#b51717"
+    },
+    success:{
+        normal:"#00d09c",
+        light:"#11a37e",
+        dark:"#19896c"
+    },
+    normal:{
+        normal:"white",
+        light:"snow",
+        dark:"#d5d5d5"
+    }
+
+
+}
 
 /**
  * Props type 
@@ -11,8 +35,35 @@ import { JsxChild } from 'typescript';
  * size="large"|"small" | medium
  * childreen="react childreen"
  * disabled=""; 
+ * 
+ * Desribe color Schema
+ * success or primary - 
+ * {
+ *   color:#00d09c,
+ *    onHover#11a37e:,
+ * onACtive:#19896c,
+ * border:,
+ * } 
+ * error{
+ *   color:'#D14343',
+ *   onHover:'#bd3a3a',
+ * onActive:'#b51717'
+ * }
+ * normal{
+ * color:white
+ * onHover:only border black
+ * onActive:'smoke or dark white'
+ * }
+ * primary{
+ *   color:'#3366ff',
+ * onHover:#234cc7,
+ * onActive:#082d9b,
+ * //transition: box-shadow 80ms ease-in-out;
+ * box shadow:0 0 0 2px #d6e0ff;
+}
+ * }
  */
-
+   
  enum sizes{
      Large="Large",
      Small="Small",
@@ -35,33 +86,57 @@ import { JsxChild } from 'typescript';
     return sizesObj[size];
 
  }
+ function getBorderRadius(size:string){
+   
+    const radius:any={
+        "Large":"4px",
+        "Small":"2px",
+        "XLarge":"6px"
+    }
 
-const styledButton=(size:sizes)=>{
+    return radius[size]
+ }
+
+const styledButton=(size:sizes,variant:any,disabled:boolean)=>{
 
     return css({
         ...getButtonSize(size),
        display:'inline-flex',
        padding:"10px",
        border:"none",
+       borderRadius:getBorderRadius(size),
+       transition:'box-shadow 70ms ease-in-out;',
     /**position is set relate bcz if user want to make thier content absolute and align inside button */
        position:"relative",
        cursor:'pointer',
-       backgroundColor:"#5eba5e",
+       backgroundColor:Theme[variant].normal,
        "&:hover":{
-        backgroundColor:'#359b35'
+        backgroundColor:Theme[variant].light
        },
        "&:active":{
+        boxShadow:'0 0 0 2px #d6e0ff',
       cursor:'pointer',
-      backgroundColor:'green',
-      outline:'2px solid ',
-      outlineStyle:"dotted",
-      outlineColor:'silver',
-     
+      backgroundColor:Theme[variant].dark, 
+      },
+      "&:focus":{
+        boxShadow:'0 0 0 2px #d6e0ff'
+      },
+      
+      ":disabled":{
+        filter: "opacity(30%)",
+        cursor: "not-allowed",
+        PointerEvent: "none",
+        backgroundColor:" #D6E0FF",
+        borderColor: "#D6E0FF"
       }
+      
        
     })
 
 }
+
+//filter: blur(5px);
+//opacity(30%)
 export const spacing = {
     none: 0,
     xxsmall: '4px',
@@ -90,11 +165,16 @@ const Default_Style = css({
 //   ,{size,childreen}:{size:any,childreen?:any}
 interface props{
     size:any,
-    children:any
+    children:any,
+    variant:string,
+    disabled?:boolean
 }
 const Button = (props:props) => {
+     
+   const { disabled=false}=props;
+   console.log("dis",disabled)
     return (
-        <button className={styledButton(props.size)}>
+        <button disabled={disabled} className={styledButton(props.size,props.variant,disabled)}>
             {props.children}
         </button>
     );
