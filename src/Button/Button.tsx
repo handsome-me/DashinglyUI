@@ -7,8 +7,20 @@ const styledButton=()=>{
 
     return css({
        display:'inline-flex',
-       padding:"20px",
-       backgroundColor:"green"
+       padding:"10px",
+       border:"none",
+       cursor:'pointer',
+       backgroundColor:"#5eba5e",
+       "&:hover":{
+        backgroundColor:'#359b35'
+       },
+       "&:active":{
+      cursor:'pointer',
+      backgroundColor:'green',
+      outline:'2px solid ',
+      outlineStyle:"dotted",
+      outlineColor:'silver'
+      }
     })
 
 }
