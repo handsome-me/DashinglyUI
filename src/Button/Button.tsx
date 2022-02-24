@@ -24,8 +24,8 @@ const Theme:any={
         normal:"white",
         light:"snow",
         dark:"#d5d5d5"
-    }
-
+    },
+   color:"white"
 
 }
 
@@ -97,13 +97,15 @@ const Theme:any={
     return radius[size]
  }
 
-const styledButton=(size:sizes,variant:any,disabled:boolean)=>{
+const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textColor?:string)=>{
+    textColor=textColor || Theme['color'];
 
     return css({
         ...getButtonSize(size),
        display:'inline-flex',
        padding:"10px",
-       border:"none",
+       border:border,
+       color:textColor,
        borderRadius:getBorderRadius(size),
        transition:'box-shadow 70ms ease-in-out;',
     /**position is set relate bcz if user want to make thier content absolute and align inside button */
@@ -121,6 +123,7 @@ const styledButton=(size:sizes,variant:any,disabled:boolean)=>{
       "&:focus":{
         boxShadow:'0 0 0 2px #d6e0ff'
       },
+      
       
       ":disabled":{
         filter: "opacity(30%)",
@@ -167,14 +170,16 @@ interface props{
     size:any,
     children:any,
     variant:string,
-    disabled?:boolean
+    disabled?:boolean,
+    border?:string,
+    textColor?:string
 }
 const Button = (props:props) => {
      
-   const { disabled=false}=props;
+   const { disabled=false,border,textColor}=props;
    console.log("dis",disabled)
     return (
-        <button disabled={disabled} className={styledButton(props.size,props.variant,disabled)}>
+        <button disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor)}>
             {props.children}
         </button>
     );

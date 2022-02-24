@@ -21,7 +21,7 @@ function App() {
       </Button>
       <br></br>
       <br></br>
-      <Button variant='normal' size="Large">
+      <Button variant='normal' textColor='red' border='0.5px solid red' size="Large">
         Meghraj Error
       </Button>
     </div>
