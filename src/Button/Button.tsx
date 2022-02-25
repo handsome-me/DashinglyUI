@@ -29,6 +29,9 @@ const Theme:any={
 
 }
 
+//try this color -its good
+//color:rgb(108, 99, 255);
+
 /**
  * Props type 
  * intent="errror"|"success"|"normal"|"primary"
@@ -63,6 +66,8 @@ const Theme:any={
 }
  * }
  */
+
+/**We need to change the color combination - chek succcess color of salesforce component library */
    
  enum sizes{
      Large="Large",
@@ -78,10 +83,10 @@ const Theme:any={
       },
       "Small":{
 
-    },
-    "XLarge":{
+      },
+     "XLarge":{
 
-    },
+     },
     }
     return sizesObj[size];
 
@@ -99,12 +104,12 @@ const Theme:any={
 
 const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textColor?:string)=>{
     textColor=textColor || Theme['color'];
-
+    
     return css({
         ...getButtonSize(size),
        display:'inline-flex',
        padding:"10px",
-       border:border,
+       border:border || "none",
        color:textColor,
        borderRadius:getBorderRadius(size),
        transition:'box-shadow 70ms ease-in-out;',
@@ -123,8 +128,6 @@ const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textC
       "&:focus":{
         boxShadow:'0 0 0 2px #d6e0ff'
       },
-      
-      
       ":disabled":{
         filter: "opacity(30%)",
         cursor: "not-allowed",
@@ -172,15 +175,28 @@ interface props{
     variant:string,
     disabled?:boolean,
     border?:string,
-    textColor?:string
+    textColor?:string,
+    icon?:any,
+    iconOnLeft?:boolean,
+    iconOnRight?:boolean
+}
+
+const imageStyle:React.CSSProperties={
+     objectFit: "cover",
+width: "100%",
+height: "25px"
 }
 const Button = (props:props) => {
      
-   const { disabled=false,border,textColor}=props;
-   console.log("dis",disabled)
+   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon}=props;
+   
     return (
         <button disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor)}>
-            {props.children}
+            {
+             icon?iconOnRight?(<>{props.children}<div />{<img style={imageStyle} src={icon}/>}</>):(<>{<img style={imageStyle} src={icon}/>}<div style={{marginLeft:'2px',marginRight:'2px'}} className="wrapper">{props.children }</div></>):(props.children)
+            }
+            
+
         </button>
     );
 };
