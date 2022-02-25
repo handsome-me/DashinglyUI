@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, cx,CSSStyleSheet } from '@emotion/css'
+import { css, cx,CSSStyleSheet, CSSInterpolation, CSSObject } from '@emotion/css'
 import { JsxChild } from 'typescript';
 
 const Theme:any={
@@ -102,7 +102,8 @@ const Theme:any={
     return radius[size]
  }
 
-const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textColor?:string)=>{
+const StyleCssObj:CSSInterpolation={}
+const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textColor?:string,style?:CSSObject)=>{
     textColor=textColor || Theme['color'];
     
     return css({
@@ -135,8 +136,8 @@ const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textC
         backgroundColor:" #D6E0FF",
         borderColor: "#D6E0FF"
       }
-      
-       
+      ,
+    ...style   
     })
 
 }
@@ -179,7 +180,11 @@ interface props{
     icon?:any,
     iconOnLeft?:boolean,
     iconOnRight?:boolean
+    style?:CSSObject,
+    onClick?:React.EventHandler<any>
 }
+
+ 
 
 const imageStyle:React.CSSProperties={
      objectFit: "cover",
@@ -193,6 +198,7 @@ function stylesIconWrapper(size:sizes){
        display:"inline-block",
        width:spacing[size],
       height:0,
+      margin:'0 2px'
 
    })
 
@@ -207,14 +213,16 @@ function stylesIconWrapper(size:sizes){
    <img style={imageStyle} src={icon}/>
    </div>)
 
+ }
+ function defaultClick(){
 
  }
 const Button = (props:props) => {
      
-   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon}=props;
+   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon,onClick=defaultClick}=props;
    
     return (
-        <button disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor)}>
+        <button onClick={onClick} disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor,props.style)}>
             {
              icon?iconOnRight?(<>{props.children}<div />{IconWrapper(props.size,icon)}</>):(<>{IconWrapper(props.size,icon)}{props.children }</>):(props.children)
             }

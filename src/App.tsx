@@ -13,12 +13,14 @@ function App() {
       </Button>
       <br></br>
       <br></br>
-      <Button icon={icon} iconOnLeft={true} variant='primary' size="Large">
+      <Button icon={icon} onClick={(e:React.SyntheticEvent)=>{
+        console.log("event",e);
+      }} iconOnLeft={true} variant='primary' size="Large">
         Success
       </Button>
       <br></br>
       <br></br>
-      <Button variant='error' icon={icon} iconOnRight={true} size="Large">
+      <Button variant='error' icon={icon} iconOnRight={true} size="Small">
         Meghraj Error
       </Button>
       <br></br>
