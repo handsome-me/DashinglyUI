@@ -183,9 +183,32 @@ interface props{
 
 const imageStyle:React.CSSProperties={
      objectFit: "cover",
-width: "100%",
-height: "25px"
+      width: "100%",
+      height: "20px"
 }
+
+function stylesIconWrapper(size:sizes){
+   
+   return css({
+       display:"inline-block",
+       width:spacing[size],
+      height:0,
+
+   })
+
+}
+
+/**We need to make the wrapper for the icon 
+ * whose width and height will be dependent on the size of the button
+ */
+ const IconWrapper=(size:sizes,icon:any)=>{
+
+   return( <div className={stylesIconWrapper(size)}>
+   <img style={imageStyle} src={icon}/>
+   </div>)
+
+
+ }
 const Button = (props:props) => {
      
    const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon}=props;
@@ -193,7 +216,7 @@ const Button = (props:props) => {
     return (
         <button disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor)}>
             {
-             icon?iconOnRight?(<>{props.children}<div />{<img style={imageStyle} src={icon}/>}</>):(<>{<img style={imageStyle} src={icon}/>}<div style={{marginLeft:'2px',marginRight:'2px'}} className="wrapper">{props.children }</div></>):(props.children)
+             icon?iconOnRight?(<>{props.children}<div />{IconWrapper(props.size,icon)}</>):(<>{IconWrapper(props.size,icon)}{props.children }</>):(props.children)
             }
             
 
@@ -206,3 +229,5 @@ Button.propTypes = {
 };
 
 export default Button;
+
+ 
