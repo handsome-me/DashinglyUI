@@ -27,7 +27,8 @@ const Theme:any={
     success:{
         normal:"#00d09c",
         light:"#11a37e",
-        dark:"#19896c"
+        dark:"#19896c",
+        deepLight:"rgb(237, 247, 237)"
     },
     normal:{
         normal:"white",

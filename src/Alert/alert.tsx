@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Theme from '../Theme';
 import { css } from '@emotion/css';
-import {AiFillExclamationCircle} from 'react-icons/ai'
-alert.propTypes = {
+import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
+// alert.propTypes = {
     
-};
+// };
  
-function styleAlert(){
+function styleAlert(serverity:serverity_type){
    
     return css({
        display:"flex",
        flex:1,
-       backgroundColor:Theme["error"].light,
+       backgroundColor:Theme[serverity].deepLight,
        border:'1px transparent',
-       borderRadius:'5px'
+       borderRadius:'5px',
+       padding:'3px'
 
     })
 
@@ -22,38 +23,54 @@ function styleAlert(){
 
 
 
-enum serverity_type{
-    "error"="error",
-     "success"="success",
-     "info"="info",
-     "warning"="warning"
-}
-enum variant_type{
-    "filled"="filled"
-}
+type serverity_type="error"| "success" | "info" |"warning"
+type variant_type="filled";
 interface props{
     serverity:serverity_type,
     variant:variant_type,
-    action:JSX.Element,
+    action?:JSX.Element | any,
     icon?:any,
     title?:string,
-    children:JSX.Element,  
+    children?:any,  
 }
-function alert(props:props) {
+
+function renderIcon(expression:string){
+    switch(expression) {
+        case "error":
+          // code block
+          return <AiFillExclamationCircle size="25px"  color='red'/>
+          
+        case "success":
+          // code block
+          return <AiFillCheckCircle size="25px"  color={'#4caf50'}/>
+         
+          case "primary":
+            // code block
+            break;
+        default:
+          // code block
+          return <AiFillExclamationCircle size="25px"  color='red'/>
+      }
+
+}
+function Alert(props:props) {
     return (
-        <>
-        <div style={{display:'inline-flex',}}>
-         <AiFillExclamationCircle color='red'/>
+        
+        <div className={styleAlert(props.serverity)}>     
+        
+       <div style={{display:'inline-flex',margin:"0 5px"}}>
+         {renderIcon(props.serverity)}
         </div>
-        <div className={styleAlert()}>
+        <div>
             {props.children}
         </div>
-        {props.title}
+       <div style={{display:'flex',flex:1}}></div>
         <div style={{display:'inline-block',margin:"5px"}}>
             {props.action}
         </div>
-        </>
+        </div>
+ 
     );
 }
 
-export default alert;
+export default Alert;

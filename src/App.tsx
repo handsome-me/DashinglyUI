@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Button from './Button/Button';
 import  icon from './downloadicon.png';
+import Alert from './Alert/alert';
 function App() {
   console.log("icon",icon);
   return (
@@ -28,6 +29,12 @@ function App() {
       <Button variant='normal' textColor='red' border='0.5px solid red' size="Large">
         Meghraj Error
       </Button>
+
+     <div style={{margin:'10px'}}>
+     <Alert variant="filled" serverity="success" >
+       Meghraj
+     </Alert>
+     </div>
     </div>
   );
 }
