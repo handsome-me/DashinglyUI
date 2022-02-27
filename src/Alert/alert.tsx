@@ -73,18 +73,18 @@ function Alert(props:props) {
          {renderIcon(props.serverity)}
         </div>
         {
-          props.title&& typeof(props.title)==="string"?(<Heading title={props.title} style={{color:props.variant==="filled"?"white":""}}/>):(props.title)
+          props.title&& typeof(props.title)==="string"?(<div  style={{display:'flex',flex:1}} ><Heading title={props.title} style={{color:props.variant==="filled"?"white":""}}/></div>):(props.title)
         }
         
         {!props.title&&
-            <div>
+            <div  style={{display:'flex',flex:1}}>
             {props.children}
         </div>
          }
         
         {props.action&&
-
-        <div style={{display:'inline-block',margin:"5px"}}>
+    
+        <div style={{display:"flex",alignItems:'center'}}>
             {props.action}
         </div>
           }

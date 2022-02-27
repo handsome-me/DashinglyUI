@@ -4,6 +4,7 @@ import './App.css';
 import Button from './Button/Button';
 import  icon from './downloadicon.png';
 import Alert from './Alert/alert';
+import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
 function App() {
   console.log("icon",icon);
   return (
@@ -31,7 +32,12 @@ function App() {
       </Button>
 
      <div style={{margin:'10px'}}>
-     <Alert title="Success" variant="filled" serverity="success" >
+     <Alert title="Success" action={
+      
+     < AiFillCheckCircle color='pink' size="20px"></AiFillCheckCircle>
+     
+    
+    } variant="filled" serverity="success" >
        Meghraj
      </Alert>
      </div>
