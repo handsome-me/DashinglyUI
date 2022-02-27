@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Theme from '../Theme';
 import { css } from '@emotion/css';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
+import Heading from '../Heading/heading';
 // alert.propTypes = {
     
 // };
@@ -16,7 +17,7 @@ function styleAlert(serverity:serverity_type){
        border:'1px transparent',
        borderRadius:'5px',
        padding:'3px'
-
+       
     })
 
 }
@@ -61,6 +62,9 @@ function Alert(props:props) {
        <div style={{display:'inline-flex',margin:"0 5px"}}>
          {renderIcon(props.serverity)}
         </div>
+        {
+            typeof(props.title)==="string"?(<Heading title={props.title}/>):(props.title)
+        }
         <div>
             {props.children}
         </div>
