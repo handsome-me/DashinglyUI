@@ -32,13 +32,14 @@ function App() {
       </Button>
 
      <div style={{margin:'10px'}}>
-     <Alert title="Success" action={
+     <Alert   action={
       
      < AiFillCheckCircle color='pink' size="20px"></AiFillCheckCircle>
      
     
     } variant="filled" serverity="success" >
        Meghraj
+       
      </Alert>
      </div>
     </div>
