@@ -4,6 +4,7 @@ import './App.css';
 import Button from './Button/Button';
 import  icon from './downloadicon.png';
 import Alert from './Alert/alert';
+import Checkbox from './Checkbox/checkbox';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
 function App() {
   console.log("icon",icon);
@@ -42,6 +43,10 @@ function App() {
        
      </Alert>
      </div>
+
+     <Checkbox onChange={()=>{
+       
+     }} ></Checkbox>
     </div>
   );
 }
