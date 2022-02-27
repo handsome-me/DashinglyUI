@@ -1,18 +1,18 @@
-type Theme_SubType={
+export type Theme_SubType={
     normal:string,
     light:string,
     dark:string,
 }
 
-type Theme_Type={
+export type Theme_Type={
     primary:Theme_SubType
     error:Theme_SubType
     success:Theme_SubType
     normal:Theme_SubType
     color:string
 }
-
-const Theme:Theme_Type={
+ 
+const Theme:any={
 
     primary:{
          normal:"#3366ff",
@@ -37,5 +37,5 @@ const Theme:Theme_Type={
    color:"white"
 
 }
-
+ 
 export default Theme;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx,CSSStyleSheet, CSSInterpolation, CSSObject } from '@emotion/css'
 import { JsxChild } from 'typescript';
-import Theme from '../Theme';
+import Theme,{Theme_SubType, Theme_Type} from '../Theme';
 
 //try this color -its good
 //color:rgb(108, 99, 255);

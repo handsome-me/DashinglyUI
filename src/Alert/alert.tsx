@@ -48,6 +48,7 @@ function alert(props:props) {
         <div className={styleAlert()}>
             {props.children}
         </div>
+        {props.title}
         <div style={{display:'inline-block',margin:"5px"}}>
             {props.action}
         </div>
