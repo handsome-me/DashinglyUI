@@ -1,8 +1,9 @@
+import { CSSObject } from '@emotion/css';
 import React from 'react';
 
-const Heading = ({title}:{title:string}) => {
+const Heading = ({title,style}:{title:string,style:React.CSSProperties}) => {
     return (
-        <div style={{fontSize:"large"}}>{title}</div>
+        <div style={{fontSize:"large",...style}} >{title}</div>
     );
 };
 

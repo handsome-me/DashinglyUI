@@ -7,13 +7,23 @@ import Heading from '../Heading/heading';
 // alert.propTypes = {
     
 // };
+/**
+ * 
+ * @param serverity 
+ * @returns 
+ * 
+ * CheckList
+ * 1-make the title working with props.childreen (div on other line causing issue)
+ * 2-typescript is not written propery
+ * 
+ */
  
-function styleAlert(serverity:serverity_type){
+function styleAlert(serverity:serverity_type,variant:variant_type){
    
     return css({
        display:"flex",
        flex:1,
-       backgroundColor:Theme[serverity].deepLight,
+       backgroundColor:variant?variant==="filled"?Theme[serverity].dark:Theme[serverity].deepLight:Theme[serverity].deepLight,
        border:'1px transparent',
        borderRadius:'5px',
        padding:'3px'
@@ -57,21 +67,28 @@ function renderIcon(expression:string){
 function Alert(props:props) {
     return (
         
-        <div className={styleAlert(props.serverity)}>     
+        <div className={styleAlert(props.serverity,props.variant)}>     
         
        <div style={{display:'inline-flex',margin:"0 5px"}}>
          {renderIcon(props.serverity)}
         </div>
         {
-            typeof(props.title)==="string"?(<Heading title={props.title}/>):(props.title)
+          props.title&& typeof(props.title)==="string"?(<Heading title={props.title} style={{color:props.variant==="filled"?"white":""}}/>):(props.title)
         }
-        <div>
+        
+        {!props.title&&
+            <div>
             {props.children}
         </div>
-       <div style={{display:'flex',flex:1}}></div>
+         }
+        
+        {props.action&&
+
         <div style={{display:'inline-block',margin:"5px"}}>
             {props.action}
         </div>
+          }
+
         </div>
  
     );

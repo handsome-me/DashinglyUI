@@ -31,7 +31,7 @@ function App() {
       </Button>
 
      <div style={{margin:'10px'}}>
-     <Alert variant="filled" serverity="success" >
+     <Alert title="Success" variant="filled" serverity="success" >
        Meghraj
      </Alert>
      </div>
