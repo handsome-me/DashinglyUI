@@ -25,7 +25,19 @@ const styleInput=()=>{
        }
     })
 }
+const styleDiv=()=>{
+   return css({
+     "::before":{
+        
+        fontFamily: "Font Awesome 5 Free",
+        content:`"\f00c"`,
+        fontWeight: "900",
+        color:'red'
 
+         
+     }
+   })
+}
 function Checkbox({
 
     defaultCheck=false,
@@ -40,7 +52,7 @@ function Checkbox({
 
 
     return (
-        <div>
+        <div className={styleDiv()}>
             <input className={styleInput()} type={"checkbox"} disabled={isDisabled}></input> 
         </div>
     );
