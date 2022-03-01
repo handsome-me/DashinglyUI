@@ -30,9 +30,11 @@ const styleDiv=()=>{
      "::before":{
         
         fontFamily: "Font Awesome 5 Free",
-        content:`"\f00c"`,
+        content:`"."`,
         fontWeight: "900",
-        color:'red'
+        color:'red',
+        border:"0.5px solid wheat",
+        width:'4px'
 
          
      }
