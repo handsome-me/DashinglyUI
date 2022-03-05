@@ -5,9 +5,10 @@ import Heading from '../Heading/heading';
 
 interface Props{
   name:string,
-  title:string
+  title:string,
+  register?:any
 }
-const RadioGroup:React.FC<Props> = memo(({title,children,name}) => {
+const RadioGroup:React.FC<Props> = memo(({title,children,name,register}) => {
     const [checkedValue,setCheckedValue]=useState("");
 
      console.log("childreen ",children)
@@ -23,7 +24,7 @@ const RadioGroup:React.FC<Props> = memo(({title,children,name}) => {
             React.Children.map(children,(Child:any,index:number)=>{
                console.log('Child',Child.props);
             const isChecked=Child.props.value==checkedValue
-              return  React.cloneElement(Child,{name:name,onChange:onChange,checked:isChecked}) 
+              return  React.cloneElement(Child,{name:name,onChange:onChange,checked:isChecked,register:register}) 
             })
             
             }

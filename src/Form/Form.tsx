@@ -25,12 +25,11 @@ const Form :React.FC<Props>=memo((Props) => {
         {
             React.Children.map(children,(child:any)=>{
             
-                console.log("-------_-_----------",child.type);
+                console.log("-------_-_----------",child);
                  
                return child.props.type=="text"||child.props.type=="password"?(
                    React.cloneElement(child,{register:register,handleSubmit:handleSubmit,errors:errors})
-               ):(React.cloneElement(child))
-
+               ):(React.cloneElement(child,{register:register}))
             })
         }    
         </form>

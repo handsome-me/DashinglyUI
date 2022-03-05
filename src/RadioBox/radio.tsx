@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useState } from 'react';
 import PropTypes from 'prop-types';
-import { css, CSSInterpolation, CSSObject } from '@emotion/css';
+import { css, CSSInterpolation, CSSObject, getRegisteredStyles } from '@emotion/css';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
@@ -13,7 +13,8 @@ interface PROPS{
     
     color?:string,
     onHoverbgColor?:string,
-    name?:string
+    name?:string,
+    register?:any
     
 }
 
@@ -102,7 +103,8 @@ const radio = (props:PROPS)=> {
         value,
         name,
         color,
-        onHoverbgColor
+        onHoverbgColor,
+        register:any
     
     }=props;
 
@@ -118,10 +120,13 @@ const radio = (props:PROPS)=> {
     }
 
     const icon=checked?<RadioButtonCheckedIcon/>:<RadioButtonUncheckedIcon/>;
-   console.log('val',value);
+   console.log('val----------',props);
+   const type="radio";
     return (
         <span className={styleRadio("WrapperStyle",props)}>
-         <input value={value} name={name} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
+         <input
+        {...props.register(name,{required:true})}
+         value={value} name={name} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
          </input>
          <span className={styleRadio("svgWrapperStyle",props)}>
             {icon}
