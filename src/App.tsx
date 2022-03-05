@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Button from './Button/Button';
@@ -8,6 +8,7 @@ import Checkbox from './Checkbox/checkbox';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
 import Radio from './RadioBox/radio';
 function App() {
+  const [selectedValue,setSelectedValue]=useState("a");
   console.log("icon",icon);
   return (
     <div className="App">
@@ -50,7 +51,15 @@ function App() {
        
      }} ></Checkbox>
 
-     <Radio></Radio>
+     <Radio onChange={(value:string)=>{
+        setSelectedValue(value);
+        return undefined;
+     }} value="a" checked={selectedValue=="a"}></Radio>
+      <Radio onChange={(value:string)=>{
+        console.log('onChagne',value);
+         setSelectedValue(value);
+        return undefined;
+     }} value="b" checked={selectedValue=="b"}></Radio>
     </div>
   );
 }

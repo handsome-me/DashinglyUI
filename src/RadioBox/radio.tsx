@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/css';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+
 interface Props{
 
 }
@@ -66,16 +68,53 @@ const styleRadio=(type:typeof STYLE_TYPE)=>{
     
 }
 
-const radio = () => {
+interface PROPS{
+
+    checked:boolean,
+    onChange:(value:string)=>undefined,
+    value:string,
+    name?:string
+    
+}
+
+
+
+const radio = ({
+    checked,
+    onChange,
+    value,
+    name
+
+}:PROPS)=> {
+   
+    //NO need to mangage the state , parent will control
+    //const [_value,setValue]=useState(value);
+
+    const handleInputOnChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
+       
+       const {value="a"}= event.target;
+       event.preventDefault();
+       /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
+       //event.stopPropagation();
+       console.log('onChange',value);
+      onChange(value);
+      
+    }
+
+    const icon=checked?<RadioButtonCheckedIcon/>:<RadioButtonUncheckedIcon/>;
+    console.log("---",checked,value);
     return (
         <span className={styleRadio("WrapperStyle")}>
-         <input className={styleRadio('inputStyle')}>
+         <input value={value} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle')}>
          </input>
          <span className={styleRadio("svgWrapperStyle")}>
-             <RadioButtonUncheckedIcon ></RadioButtonUncheckedIcon>
+            {icon}
          </span>
         </span>
     );
+
+
+     
 };
 
 radio.propTypes = {
