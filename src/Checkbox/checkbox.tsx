@@ -18,14 +18,12 @@ const styleInput=()=>{
        ":active":{
            backgroundColor:'pink'
        },
-     
-       
        "input":{
         border:"2px solid black",
        }
     })
 }
-<FormControl>
+{/* <FormControl>
       <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
@@ -36,7 +34,7 @@ const styleInput=()=>{
         <FormControlLabel value="male" control={<Radio />} label="Male" />
         <FormControlLabel value="other" control={<Radio />} label="Other" />
       </RadioGroup>
-    </FormControl>
+    </FormControl> */}
 const styleDiv=()=>{
    return css({
      "::before":{
