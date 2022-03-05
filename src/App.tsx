@@ -68,11 +68,11 @@ function App() {
      }} value="b" checked={selectedValue=="b"}></Radio>
 
       <RadioGroup name="fav-language" title="fav-language">
-        
+
       <FormControlLabel
-      value="javascript"
+      value="java"
       Element={<Radio ></Radio>}
-      label="javascript"
+      label="java"
       type="RadioBox"
       />
         <FormControlLabel

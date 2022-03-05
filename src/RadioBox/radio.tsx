@@ -111,13 +111,14 @@ const radio = (props:PROPS)=> {
        event.preventDefault();
        /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
        //event.stopPropagation();
-       console.log("onChange",value);
+       //console.log("onChange",value);
+       console.log('onChange ',value);
        onChange&&onChange(value);
       
     }
 
     const icon=checked?<RadioButtonCheckedIcon/>:<RadioButtonUncheckedIcon/>;
-   
+   console.log('val',value);
     return (
         <span className={styleRadio("WrapperStyle",props)}>
          <input value={value} name={name} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
