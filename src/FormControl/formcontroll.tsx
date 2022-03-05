@@ -19,17 +19,18 @@ interface Props{
     Element:React.ReactElement;
     label:string;
     type:"RadioBox" | "CheckBox";
+    name?:string;
 }
 
 
 const FormControlLabel = (props:Props) => {
-    const {value,label,Element,type}=props;
-   
+    const {value,label,Element,type,name}=props;
+    
     const _element=type=="RadioBox";
 
     return (
         <div className={wrapperStyle()}>
-            {Element}
+            {React.cloneElement(Element,{name:name})}
             <span style={{margin:'2vw'}}><Heading title={label} /></span>
         </div>
     );

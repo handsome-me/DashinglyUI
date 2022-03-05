@@ -10,9 +10,10 @@ interface PROPS{
     checked?:boolean,
     onChange?:(value:string)=>undefined,
     value?:string,
-    name?:string,
+    
     color?:string,
-    onHoverbgColor?:string
+    onHoverbgColor?:string,
+    name?:string
     
 }
 
@@ -110,6 +111,7 @@ const radio = (props:PROPS)=> {
        event.preventDefault();
        /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
        //event.stopPropagation();
+       console.log("onChange",value);
        onChange&&onChange(value);
       
     }
@@ -118,7 +120,7 @@ const radio = (props:PROPS)=> {
    
     return (
         <span className={styleRadio("WrapperStyle",props)}>
-         <input value={value} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
+         <input value={value} name={name} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
          </input>
          <span className={styleRadio("svgWrapperStyle",props)}>
             {icon}
