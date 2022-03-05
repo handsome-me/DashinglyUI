@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx,CSSStyleSheet, CSSInterpolation, CSSObject } from '@emotion/css'
-import { JsxChild } from 'typescript';
+import { JsxChild, TypeOfTag } from 'typescript';
 import Theme,{Theme_SubType, Theme_Type} from '../Theme';
 
 //try this color -its good
@@ -44,12 +44,10 @@ import Theme,{Theme_SubType, Theme_Type} from '../Theme';
 
 /**We need to change the color combination - chek succcess color of salesforce component library */
    
- enum sizes{
-     Large="Large",
-     Small="Small",
-     XLarge="XLarge",
-    }
- function getButtonSize(size:sizes){
+ let  sizes:"Large" | "Small" | "XLarge";
+      
+    
+ function getButtonSize(size:typeof sizes){
 
     const sizesObj={
       "Large":{
@@ -78,7 +76,7 @@ import Theme,{Theme_SubType, Theme_Type} from '../Theme';
  }
 
 const StyleCssObj:CSSInterpolation={}
-const styledButton=(size:sizes,variant:any,disabled:boolean,border?:string,textColor?:string,style?:CSSObject)=>{
+const styledButton=(size:typeof sizes,variant:any,disabled:boolean,border?:string,textColor?:string,style?:CSSObject)=>{
     textColor=textColor || Theme['color'];
     
     return css({
@@ -145,9 +143,10 @@ const Default_Style = css({
    
   })
 //   ,{size,childreen}:{size:any,childreen?:any}
+let  ButtonType:"button" | "submit" | "reset" | undefined
 interface props{
-    size:any,
-    children:any,
+    size:typeof sizes,
+    children?:any,
     variant:string,
     disabled?:boolean,
     border?:string,
@@ -156,7 +155,8 @@ interface props{
     iconOnLeft?:boolean,
     iconOnRight?:boolean
     style?:CSSObject,
-    onClick?:React.EventHandler<any>
+    onClick?:React.EventHandler<any>,
+    type?: typeof ButtonType
 }
 
  
@@ -167,7 +167,7 @@ const imageStyle:React.CSSProperties={
       height: "20px"
 }
 
-function stylesIconWrapper(size:sizes){
+function stylesIconWrapper(size:typeof sizes){
    
    return css({
        display:"inline-block",
@@ -182,7 +182,7 @@ function stylesIconWrapper(size:sizes){
 /**We need to make the wrapper for the icon 
  * whose width and height will be dependent on the size of the button
  */
- const IconWrapper=(size:sizes,icon:any)=>{
+ const IconWrapper=(size:typeof sizes,icon:any)=>{
 
    return( <div className={stylesIconWrapper(size)}>
    <img style={imageStyle} src={icon}/>
@@ -192,14 +192,15 @@ function stylesIconWrapper(size:sizes){
  function defaultClick(){
 
  }
+  
 const Button = (props:props) => {
      
-   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon,onClick=defaultClick}=props;
+   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon,onClick=defaultClick,type="submit"}=props;
    
     return (
-        <button onClick={onClick} disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor,props.style)}>
+        <button  type={type} onClick={onClick} disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor,props.style)}>
             {
-             icon?iconOnRight?(<>{props.children}<div />{IconWrapper(props.size,icon)}</>):(<>{IconWrapper(props.size,icon)}{props.children }</>):(props.children)
+             icon?iconOnRight?(<>{props?.children}<div />{IconWrapper(props.size,icon)}</>):(<>{IconWrapper(props.size,icon)}{props.children }</>):(props.children)
             }
             
 

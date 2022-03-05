@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Button from './Button/Button';
-import  icon from './downloadicon.png';
+ import  icon from './downloadicon.png';
 import Alert from './Alert/alert';
 import Checkbox from './Checkbox/checkbox';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
@@ -11,6 +10,7 @@ import RadioGroup from './RadioGroup/RadioGroup';
 import FormControlLabel from './FormControl/formcontroll'
 import Form from './Form/Form';
 import InputField from './InputField/InputField';
+import Button from '../src/Button/Button';
 function App() {
   const [selectedValue,setSelectedValue]=useState("a");
   console.log("icon",icon);
@@ -130,6 +130,22 @@ function App() {
         rules={{ required: 'You must enter your first name.' }}
         
        ></InputField>
+       <InputField   
+        type="text"
+        name="lastName"
+        label="Last Name"
+        placeHolder="Last Name"
+        rules={{ required: 'You must enter your last name.' }}
+        
+       ></InputField>
+      <Button 
+      type="submit"
+      variant='success'
+      size="Small" 
+      style={{padding:'5px'}}   
+      >
+        Submit
+      </Button>
       </Form>
 
     </div>

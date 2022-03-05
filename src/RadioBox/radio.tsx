@@ -51,7 +51,6 @@ const svgWrapperStyle=function(defaultProperty?:CSSObject):string{
         display:'flex',
         alignItems:'center',
         ...defaultProperty
-
     })
 }
 const inputStyle=function():string{
@@ -110,23 +109,25 @@ const radio = (props:PROPS)=> {
 
     const handleInputOnChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
        const {value="a"}= event.target;
-       event.preventDefault();
+       
        /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
        //event.stopPropagation();
        //console.log("onChange",value);
        console.log('onChange ',value);
+       
        onChange&&onChange(value);
       
     }
 
     const icon=checked?<RadioButtonCheckedIcon/>:<RadioButtonUncheckedIcon/>;
-   console.log('val----------',props);
-   const type="radio";
+   console.log('val----------',checked);
+  // const _value=value.le;
+   
     return (
         <span className={styleRadio("WrapperStyle",props)}>
          <input
-        {...props.register(name,{required:true})}
-         value={value} name={name} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
+        {...props.register(name)}
+         value={value} name={name}   type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
          </input>
          <span className={styleRadio("svgWrapperStyle",props)}>
             {icon}

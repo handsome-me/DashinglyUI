@@ -22,18 +22,19 @@ interface Props{
     name?:string;
     onChange?:any,
     checked?:boolean,
-    register?:any
+    register?:any,
+    errors?:any
 }
 
 
 const FormControlLabel = (props:Props) => {
-    const {value,label,Element,type,name,onChange,checked,register}=props;
+    const {value,label,Element,type,name,onChange,checked,register,errors}=props;
     
     const _element=type=="RadioBox";
-     
+     console.log("erros in formconrol",errors);
     return (
         <div className={wrapperStyle()}>
-            {React.cloneElement(Element,{register:register,name:name,onChange:onChange,checked:checked,value:value})}
+            {React.cloneElement(Element,{register:register,name:name,onChange:onChange,checked:checked,value:value,errors:errors})}
             <span style={{margin:'2vw'}}><Heading title={label} /></span>
         </div>
     );

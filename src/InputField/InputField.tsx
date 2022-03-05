@@ -1,5 +1,8 @@
 import { CSSObject } from '@emotion/react';
+import { OneKPlusOutlined } from '@mui/icons-material';
 import React, {useState, memo } from 'react';
+ 
+import { FieldErrors } from 'react-hook-form/dist/types/errors';
 
 /**
  * id="firstName"
@@ -30,19 +33,22 @@ import React, {useState, memo } from 'react';
 const InputField :React.FC<Props>= memo((Props) => {
     const {type,name,label, placeHolder,style,rules,errors,required=false,register}=Props;
 
+     console.log('Errors',errors);
+      
     const handleInputOnChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
         const {value}=event.target;
-         console.log("onChange ",value);
-          setValue(value);
+        const _value=value?.length==0?"":value;
+        console.log("ccdcdvalue",_value);
+          setValue(_value);
     }
     const [_value,setValue]=useState("");
 
-    console.log("Props",Props);
+    console.log("value",_value);
     return (
         <input name={name} 
         value={_value}
         type={type} 
-        {...register(name,{required:true})}
+        {...register(name,{minLength: 4,required:true})}
         onChange={handleInputOnChange}
         placeholder={placeHolder} style={style}></input>
     );
