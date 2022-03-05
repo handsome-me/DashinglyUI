@@ -21,7 +21,7 @@ const RadioGroup:React.FC<Props> = memo(({title,children,name}) => {
          <div>
             {
             React.Children.map(children,(Child:any,index:number)=>{
-console.log('Child',Child.props);
+               console.log('Child',Child.props);
             const isChecked=Child.props.value==checkedValue
               return  React.cloneElement(Child,{name:name,onChange:onChange,checked:isChecked}) 
             })

@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-
+import {useForm} from 'react-hook-form';
 interface Props{
   
 
@@ -8,10 +8,32 @@ interface Props{
 
 const Form :React.FC<Props>=memo((Props) => {
      console.log("  -childreen-  ",Props.children);
-    return (
-        <div>
+     const {children}=Props;
+     const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm<any>();
+
+
+      const onSubmit = handleSubmit((data) => {
+        console.log('submitting...',data);
+      });
+
+     return (
+        <form onSubmit={onSubmit}>       
+        {
+            React.Children.map(children,(child:any)=>{
             
-        </div>
+                console.log("-------_-_----------",child.type);
+                 
+               return child.props.type=="text"||child.props.type=="password"?(
+                   React.cloneElement(child,{register:register,handleSubmit:handleSubmit,errors:errors})
+               ):(React.cloneElement(child))
+
+            })
+        }    
+        </form>
     );
 });
 

@@ -122,7 +122,14 @@ function App() {
  
        </RadioGroup>
 
-       <InputField></InputField>
+       <InputField   
+        type="text"
+        name="firstName"
+        label="First Name"
+        placeHolder="First Name"
+        rules={{ required: 'You must enter your first name.' }}
+        
+       ></InputField>
       </Form>
 
     </div>
