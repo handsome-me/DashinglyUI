@@ -195,7 +195,7 @@ function stylesIconWrapper(size:typeof sizes){
   
 const Button = (props:props) => {
      
-   const { disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon,onClick=defaultClick,type="submit"}=props;
+   const { style,disabled=false,border,textColor,iconOnLeft=true,iconOnRight,icon,onClick=defaultClick,type="submit"}=props;
    
     return (
         <button  type={type} onClick={onClick} disabled={disabled} className={styledButton(props.size,props.variant,disabled,border,textColor,props.style)}>
