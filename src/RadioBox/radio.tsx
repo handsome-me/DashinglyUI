@@ -12,16 +12,23 @@ const wrapperStyle=function():string{
     return css({
         position:"relative",
         display:'inline-flex',
-        border:"1px solid ",
         borderRadius:'50%',
-        color:'pink'
+        color:'rgba(0, 0, 0, 0.6);',
+        justifyContent:'center',
+        padding:'8px',
+        alignItems:'center',
+        ':hover':{
+            backgroundColor:'rgba(25, 118, 210, 0.04)'
+        }
+
     })
 }
 const svgWrapperStyle=function():string{
     return css({
         position:'relative',
         display:'flex',
-        color:'pink'
+        color:'rgba(0, 0, 0, 0.6);',
+        alignItems:'center'
     })
 }
 const inputStyle=function():string{
@@ -29,10 +36,13 @@ const inputStyle=function():string{
         position:'absolute',
         opacity:0,
         zIndex:1,
+        cursor:'pointer',
         top:0,
         bottom:0,
         width:'100%',
         height:'100%',
+        border:0,
+        padding:0,
         
     })
 }

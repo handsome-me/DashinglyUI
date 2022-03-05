@@ -6,6 +6,7 @@ import  icon from './downloadicon.png';
 import Alert from './Alert/alert';
 import Checkbox from './Checkbox/checkbox';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
+import Radio from './RadioBox/radio';
 function App() {
   console.log("icon",icon);
   return (
@@ -48,6 +49,8 @@ function App() {
      <Checkbox onChange={()=>{
        
      }} ></Checkbox>
+
+     <Radio></Radio>
     </div>
   );
 }
