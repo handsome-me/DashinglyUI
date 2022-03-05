@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { css, CSSInterpolation, CSSObject } from '@emotion/css';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import { bgcolor } from '@mui/system';
+
 
 interface PROPS{
 
-    checked:boolean,
-    onChange:(value:string)=>undefined,
-    value:string,
+    checked?:boolean,
+    onChange?:(value:string)=>undefined,
+    value?:string,
     name?:string,
     color?:string,
     onHoverbgColor?:string
@@ -110,7 +110,7 @@ const radio = (props:PROPS)=> {
        event.preventDefault();
        /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
        //event.stopPropagation();
-       onChange(value);
+       onChange&&onChange(value);
       
     }
 

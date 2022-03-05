@@ -7,6 +7,7 @@ import Alert from './Alert/alert';
 import Checkbox from './Checkbox/checkbox';
 import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
 import Radio from './RadioBox/radio';
+import FormControlLabel from './FormControl/formcontroll'
 function App() {
   const [selectedValue,setSelectedValue]=useState("a");
   console.log("icon",icon);
@@ -64,6 +65,16 @@ function App() {
          setSelectedValue(value);
         return undefined;
      }} value="b" checked={selectedValue=="b"}></Radio>
+
+      <FormControlLabel
+      value="javascript"
+      Element={<Radio ></Radio>}
+      label="javascript"
+      type="RadioBox"
+      />
+        
+      
+
     </div>
   );
 }
