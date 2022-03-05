@@ -51,11 +51,15 @@ function App() {
        
      }} ></Checkbox>
 
-     <Radio onChange={(value:string)=>{
+     <Radio 
+      
+     onChange={(value:string)=>{
         setSelectedValue(value);
         return undefined;
      }} value="a" checked={selectedValue=="a"}></Radio>
-      <Radio onChange={(value:string)=>{
+      <Radio 
+      
+      onChange={(value:string)=>{
         console.log('onChagne',value);
          setSelectedValue(value);
         return undefined;

@@ -1,17 +1,32 @@
 import React, { SyntheticEvent, useState } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/css';
+import { css, CSSInterpolation, CSSObject } from '@emotion/css';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { bgcolor } from '@mui/system';
 
-interface Props{
+interface PROPS{
 
+    checked:boolean,
+    onChange:(value:string)=>undefined,
+    value:string,
+    name?:string,
+    color?:string,
+    onHoverbgColor?:string
+    
 }
+
 let   STYLE_TYPE:"WrapperStyle" | "svgWrapperStyle" | "inputStyle";
 
- 
-const wrapperStyle=function():string{
-    return css({
+const colorStyle={
+    defaultBackground:'rgba(25, 118, 210, 0.04)',
+    defaultColorUnCheck:'rgba(0, 0, 0, 0.6)',
+    defaultColorChecked:'#1976d2'
+
+ };
+const wrapperStyle=function(bgColor?:string):string{
+    
+      return css({
         position:"relative",
         display:'inline-flex',
         borderRadius:'50%',
@@ -20,17 +35,21 @@ const wrapperStyle=function():string{
         padding:'8px',
         alignItems:'center',
         ':hover':{
-            backgroundColor:'rgba(25, 118, 210, 0.04)'
+            backgroundColor:bgColor||colorStyle.defaultBackground
         }
-
     })
+    
+    
+
+    
 }
-const svgWrapperStyle=function():string{
+const svgWrapperStyle=function(defaultProperty?:CSSObject):string{
     return css({
         position:'relative',
         display:'flex',
-        color:'rgba(0, 0, 0, 0.6);',
-        alignItems:'center'
+        alignItems:'center',
+        ...defaultProperty
+
     })
 }
 const inputStyle=function():string{
@@ -48,9 +67,12 @@ const inputStyle=function():string{
         
     })
 }
-const styleRadio=(type:typeof STYLE_TYPE)=>{
-     
-     
+const styleRadio=(type:typeof STYLE_TYPE,props:PROPS)=>{
+      
+    const {checked,color,onHoverbgColor}=props;
+   const  defaultRadioProperty:CSSObject={
+       color:checked?color || colorStyle.defaultColorChecked:colorStyle.defaultColorUnCheck
+   }
     switch(type){
 
         case "WrapperStyle":{
@@ -60,7 +82,7 @@ const styleRadio=(type:typeof STYLE_TYPE)=>{
             return inputStyle();
         }
         case "svgWrapperStyle":{
-            return svgWrapperStyle();
+            return svgWrapperStyle(defaultRadioProperty);
         }
       
         
@@ -68,46 +90,37 @@ const styleRadio=(type:typeof STYLE_TYPE)=>{
     
 }
 
-interface PROPS{
-
-    checked:boolean,
-    onChange:(value:string)=>undefined,
-    value:string,
-    name?:string
-    
-}
 
 
-
-const radio = ({
-    checked,
-    onChange,
-    value,
-    name
-
-}:PROPS)=> {
-   
+const radio = (props:PROPS)=> {
     //NO need to mangage the state , parent will control
     //const [_value,setValue]=useState(value);
+   const  {
+        checked,
+        onChange,
+        value,
+        name,
+        color,
+        onHoverbgColor
+    
+    }=props;
 
     const handleInputOnChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
-       
        const {value="a"}= event.target;
        event.preventDefault();
        /*confuse here between (will onChange trigger event propogation, need to finf(i think NO))*/
        //event.stopPropagation();
-       console.log('onChange',value);
-      onChange(value);
+       onChange(value);
       
     }
 
     const icon=checked?<RadioButtonCheckedIcon/>:<RadioButtonUncheckedIcon/>;
-    console.log("---",checked,value);
+   
     return (
-        <span className={styleRadio("WrapperStyle")}>
-         <input value={value} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle')}>
+        <span className={styleRadio("WrapperStyle",props)}>
+         <input value={value} checked={checked} type="radio" onChange={handleInputOnChange} className={styleRadio('inputStyle',props)}>
          </input>
-         <span className={styleRadio("svgWrapperStyle")}>
+         <span className={styleRadio("svgWrapperStyle",props)}>
             {icon}
          </span>
         </span>
