@@ -9,6 +9,8 @@ import {AiFillExclamationCircle,AiFillCheckCircle} from 'react-icons/ai'
 import Radio from './RadioBox/radio';
 import RadioGroup from './RadioGroup/RadioGroup';
 import FormControlLabel from './FormControl/formcontroll'
+import Form from './Form/Form';
+import InputField from './InputField/InputField';
 function App() {
   const [selectedValue,setSelectedValue]=useState("a");
   console.log("icon",icon);
@@ -53,7 +55,7 @@ function App() {
        
      }} ></Checkbox>
 
-     <Radio 
+     {/* <Radio 
       
      onChange={(value:string)=>{
         setSelectedValue(value);
@@ -83,8 +85,45 @@ function App() {
       />
         
 
-      </RadioGroup>
+      </RadioGroup> */}
       
+
+      <Form>
+
+      {/* <Radio 
+      
+      onChange={(value:string)=>{
+         setSelectedValue(value);
+         return undefined;
+      }} value="a" checked={selectedValue=="a"}></Radio>
+       <Radio 
+       
+       onChange={(value:string)=>{
+         console.log('onChagne',value);
+          setSelectedValue(value);
+         return undefined;
+      }} value="b" checked={selectedValue=="b"}></Radio>
+  */}
+       <RadioGroup name="fav-language" title="fav-language">
+ 
+       <FormControlLabel
+       value="java"
+       Element={<Radio ></Radio>}
+       label="java"
+       type="RadioBox"
+       />
+         <FormControlLabel
+       value="javascript"
+       Element={<Radio ></Radio>}
+       label="javascript"
+       type="RadioBox"
+       />
+         
+ 
+       </RadioGroup>
+
+       <InputField></InputField>
+      </Form>
 
     </div>
   );
